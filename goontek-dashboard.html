@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$GOONTEK | Community Deployed Degeneracy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050508;
+            --bg-secondary: #0a0a10;
+            --bg-card: #0f0f18;
+            --bg-card-hover: #14141f;
+            --text-primary: #ffffff;
+            --text-secondary: #8888a0;
+            --text-muted: #555566;
+            --accent-blue: #3b82f6;
+            --accent-blue-light: #60a5fa;
+            --accent-blue-glow: rgba(59, 130, 246, 0.35);
+            --accent-green: #22c55e;
+            --accent-green-glow: rgba(34, 197, 94, 0.3);
+            --border-color: #1a1a2e;
+            --border-light: #252538;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grid background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.015) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(5, 5, 8, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-btn {
+            background: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-blue-light);
+            color: white;
+        }
+
+        /* CA Section */
+        .ca-section {
+            padding: 80px 32px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ca-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ca-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .ca-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .ca-address {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(0.7rem, 2.5vw, 1rem);
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            word-break: break-all;
+        }
+
+        .ca-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .copy-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-blue-light);
+        }
+
+        .copy-btn.copied {
+            background: var(--accent-green);
+        }
+
+        /* Dashboard Hero - Above the fold */
+        .dashboard-hero {
+            min-height: calc(100vh - 160px);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 32px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-blue);
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Trackers Grid */
+        .trackers-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .tracker-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tracker-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+
+        .tracker-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0.5;
+        }
+
+        .tracker-card.goonfunds::before {
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+        }
+
+        .tracker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .tracker-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        .tracker-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .tracker-icon.blue {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .tracker-icon.green {
+            background: rgba(34, 197, 94, 0.15);
+        }
+
+        .tracker-value {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+
+        .tracker-value.blue {
+            color: var(--accent-blue);
+            text-shadow: 0 0 40px var(--accent-blue-glow);
+        }
+
+        .tracker-value.green {
+            color: var(--accent-green);
+            text-shadow: 0 0 40px var(--accent-green-glow);
+        }
+
+        .tracker-subvalue {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .tracker-breakdown {
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            padding: 5px 0;
+        }
+
+        .breakdown-item span:first-child {
+            color: var(--text-muted);
+        }
+
+        .breakdown-item span:last-child {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .progress-container {
+            margin-top: 12px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .progress-fill.blue {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-light));
+        }
+
+        .progress-fill.green {
+            background: linear-gradient(90deg, #16a34a, var(--accent-green));
+        }
+
+        /* Mini Chart */
+        .mini-chart {
+            height: 50px;
+            margin-top: 12px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--accent-blue);
+            opacity: 0.6;
+            border-radius: 2px 2px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+        }
+
+        /* Quick Stats Row */
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 24px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .quick-stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            text-align: center;
+            padding: 16px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* Voting Section */
+        .voting-section {
+            padding: 80px 32px;
+            background: var(--bg-secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .voting-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .poll-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .poll-week {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .poll-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .poll-timer svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-blue);
+        }
+
+        /* Candidates Grid */
+        .candidates-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .candidate {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candidate:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-card-hover);
+        }
+
+        .candidate.selected {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .candidate.selected::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-blue);
+        }
+
+        .candidate-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .candidate-rank {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            width: 24px;
+            text-align: center;
+        }
+
+        .candidate-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-blue), #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .candidate-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .candidate-name {
+            font-size: 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .candidate-handle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .candidate-earnings {
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .candidate-stats {
+            text-align: right;
+            min-width: 100px;
+        }
+
+        .candidate-votes {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .candidate-percentage {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .candidate-progress {
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            margin-top: 14px;
+            overflow: hidden;
+        }
+
+        .candidate-progress-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        /* Vote Action */
+        .vote-action {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .vote-btn {
+            padding: 18px 56px;
+            font-size: 1rem;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px var(--accent-blue-glow);
+        }
+
+        .vote-btn:hover:not(:disabled) {
+            background: var(--accent-blue-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px var(--accent-blue-glow);
+        }
+
+        .vote-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .vote-btn.voted {
+            background: var(--accent-green);
+            box-shadow: 0 0 30px var(--accent-green-glow);
+        }
+
+        .vote-notice {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .formula-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .formula-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .formula {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .formula-part {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .formula-highlight {
+            color: var(--accent-blue);
+        }
+
+        .formula-green {
+            color: var(--accent-green);
+        }
+
+        .formula-operator {
+            color: var(--text-muted);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .step-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .step-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 32px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--accent-blue);
+            padding: 16px 32px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+            box-shadow: 0 0 30px var(--accent-blue-glow);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .trackers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            nav {
+                padding: 12px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .dashboard-hero {
+                padding: 20px 20px 30px;
+            }
+
+            .ca-section {
+                padding: 70px 20px 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .candidate-row {
+                flex-wrap: wrap;
+            }
+
+            .candidate-stats {
+                width: 100%;
+                text-align: left;
+                margin-top: 12px;
+                display: flex;
+                gap: 16px;
+                align-items: center;
+            }
+
+            .ca-address {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <nav>
+        <div class="logo">$<span>GOONTEK</span></div>
+        <div class="nav-links">
+            <a href="#vote">Vote</a>
+            <a href="#how">How It Works</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://pump.fun" target="_blank" class="nav-btn">Buy $GOONTEK</a>
+        </div>
+    </nav>
+
+    <!-- CA Section -->
+    <section class="ca-section">
+        <div class="ca-container">
+            <div class="ca-label">Contract Address</div>
+            <div class="ca-address">
+                <span class="ca-text" id="ca-text">YOUR_CONTRACT_ADDRESS_HERE</span>
+                <button class="copy-btn" id="copy-btn" onclick="copyCA()">Copy</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Hero - Above the Fold -->
+    <section class="dashboard-hero">
+        <div class="hero-header">
+            <div class="live-badge">Live on Pump.fun</div>
+            <h1 class="hero-title">Community <span class="highlight">Deployed</span> Degeneracy</h1>
+            <p class="hero-subtitle">Creator fees flow into community-voted OnlyFans subscriptions</p>
+        </div>
+
+        <div class="trackers-grid">
+            <!-- Market Cap Tracker -->
+            <div class="tracker-card">
+                <div class="tracker-header">
+                    <span class="tracker-label">Market Cap</span>
+                    <div class="tracker-icon blue">📈</div>
+                </div>
+                <div class="tracker-value blue" id="market-cap">$0</div>
+                <div class="tracker-subvalue" id="mcap-change">+0% (24h)</div>
+                <div class="mini-chart" id="mcap-chart"></div>
+                <div class="tracker-breakdown">
+                    <div class="breakdown-item">
+                        <span>24h Volume</span>
+                        <span id="volume-24h">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Circulating Supply</span>
+                        <span id="supply">0 $GOONTEK</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Creator Fees Tracker -->
+            <div class="tracker-card">
+                <div class="tracker-header">
+                    <span class="tracker-label">Creator Fees</span>
+                    <div class="tracker-icon blue">💸</div>
+                </div>
+                <div class="tracker-value blue" id="creator-fees">$0</div>
+                <div class="tracker-subvalue">Total Collected</div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>50% → GoOnFunds</span>
+                        <span id="fees-to-goon">$0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill blue" id="fees-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="tracker-breakdown">
+                    <div class="breakdown-item">
+                        <span>Today</span>
+                        <span id="fees-today">+$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>This Week</span>
+                        <span id="fees-week">+$0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GoOnFunds Tracker -->
+            <div class="tracker-card goonfunds">
+                <div class="tracker-header">
+                    <span class="tracker-label">GoOnFunds</span>
+                    <div class="tracker-icon green">🎯</div>
+                </div>
+                <div class="tracker-value green" id="goonfunds">$0</div>
+                <div class="tracker-subvalue">Total Raised for Deployment</div>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Next Deployment Goal</span>
+                        <span id="goon-goal">$0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill green" id="goon-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="tracker-breakdown">
+                    <div class="breakdown-item">
+                        <span>From 3% Market Cap</span>
+                        <span id="from-mcap">$0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>From 50% Creator Fees</span>
+                        <span id="from-fees">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-stats">
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="holders">0</div>
+                <div class="quick-stat-label">Holders</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="total-votes">0</div>
+                <div class="quick-stat-label">Total Votes</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="deployments">0</div>
+                <div class="quick-stat-label">Deployments</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-value" id="deployed-total">$0</div>
+                <div class="quick-stat-label">Total Deployed</div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Voting Section -->
+    <section class="voting-section" id="vote">
+        <div class="voting-container">
+            <div class="section-header">
+                <h2 class="section-title">Vote for Next Deployment</h2>
+                <p class="section-subtitle">Top 10 OnlyFans creators — Community decides where funds go</p>
+            </div>
+
+            <div class="poll-info">
+                <span class="poll-week">Week 1 Poll</span>
+                <div class="poll-timer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span id="countdown">7d 00h 00m</span>
+                </div>
+            </div>
+
+            <div class="candidates-grid" id="candidates-list"></div>
+
+            <div class="vote-action">
+                <button class="vote-btn" id="vote-btn" disabled>Select a Creator</button>
+                <p class="vote-notice">Connect wallet to vote • 1 $GOONTEK = 1 vote</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how">
+        <div class="section-header">
+            <h2 class="section-title">How GoOnFunds Works</h2>
+            <p class="section-subtitle">Tokenomics designed for maximum degeneracy</p>
+        </div>
+
+        <div class="formula-card">
+            <div class="formula-title">GoOnFunds Formula</div>
+            <div class="formula">
+                <span class="formula-part"><span class="formula-green">GoOnFunds</span></span>
+                <span class="formula-operator">=</span>
+                <span class="formula-part">(<span class="formula-highlight">3%</span> × Market Cap)</span>
+                <span class="formula-operator">+</span>
+                <span class="formula-part">(<span class="formula-highlight">50%</span> × Creator Fees)</span>
+            </div>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <h3 class="step-title">Buy $GOONTEK</h3>
+                <p class="step-desc">Get tokens on pump.fun. Join the community of degens.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <h3 class="step-title">Fees Compound</h3>
+                <p class="step-desc">1% creator fee on trades. 50% flows to GoOnFunds.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <h3 class="step-title">Market Cap Bonus</h3>
+                <p class="step-desc">3% of market cap added to GoOnFunds treasury.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <h3 class="step-title">Community Votes</h3>
+                <p class="step-desc">Token holders vote weekly on deployment target.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://t.me" target="_blank">Telegram</a>
+            <a href="https://discord.gg" target="_blank">Discord</a>
+            <a href="https://pump.fun" target="_blank">Pump.fun</a>
+            <a href="https://dexscreener.com" target="_blank">Chart</a>
+        </div>
+        <p class="footer-copy">© 2026 $GOONTEK — Not financial advice. Pure degeneracy.</p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================================
+        // 🎮 EDIT THESE VALUES - Everything else auto-calculates!
+        // ============================================================
+        const CONFIG = {
+            // Contract Address
+            contractAddress: "YOUR_CONTRACT_ADDRESS_HERE",
+            
+            // === MAIN VALUES (edit these) ===
+            marketCap: 0,              // Market cap in USD (e.g., 2400000 for $2.4M)
+            marketCapChange: "+0%",    // 24h change (e.g., "+12.4%" or "-5.2%")
+            volume24h: 0,              // 24h volume in USD (e.g., 847291)
+            circulatingSupply: "0",    // Supply with suffix (e.g., "690M" or "1B")
+            
+            creatorFeesTotal: 0,       // Total creator fees collected in USD (e.g., 48291)
+            feesToday: 0,              // Fees collected today (e.g., 1247)
+            feesThisWeek: 0,           // Fees collected this week (e.g., 8420)
+            
+            // === QUICK STATS ===
+            holders: 0,                // Number of holders (e.g., 6942)
+            deployments: 0,            // Number of deployments made (e.g., 7)
+            totalDeployed: 0,          // Total USD deployed (e.g., 69420)
+            
+            // === GOONFUNDS SETTINGS ===
+            goonfundsGoal: 10000,      // Next deployment goal in USD (e.g., 100000)
+            
+            // === POLL SETTINGS ===
+            pollWeek: 1,               // Current week number
+            pollEndDays: 7,            // Days until poll ends
+        };
+        
+        // ============================================================
+        // 🔄 AUTO-CALCULATED VALUES (don't edit these)
+        // ============================================================
+        const CALCULATED = {
+            fromMarketCap: CONFIG.marketCap * 0.03,
+            fromCreatorFees: CONFIG.creatorFeesTotal * 0.5,
+            get goonfundsTotal() {
+                return this.fromMarketCap + this.fromCreatorFees;
+            },
+            get feesToGoon() {
+                return CONFIG.creatorFeesTotal * 0.5;
+            }
+        };
+        // ============================================================
+
+        // Top 10 OnlyFans creators data
+        const candidates = [
+            { id: 1, name: 'Blac Chyna', handle: '@blacchyna', earnings: '$20M/mo', emoji: '👑', gradient: 'linear-gradient(135deg, #f472b6, #ec4899)' },
+            { id: 2, name: 'Sophie Rain', handle: '@sophierain', earnings: '$5.3M/mo', emoji: '🌧️', gradient: 'linear-gradient(135deg, #60a5fa, #3b82f6)' },
+            { id: 3, name: 'Bella Thorne', handle: '@bellathorne', earnings: '$3.1M/mo', emoji: '🔥', gradient: 'linear-gradient(135deg, #f97316, #ef4444)' },
+            { id: 4, name: 'Cardi B', handle: '@iamcardib', earnings: '$2.8M/mo', emoji: '💎', gradient: 'linear-gradient(135deg, #a78bfa, #8b5cf6)' },
+            { id: 5, name: 'Iggy Azalea', handle: '@iggyazalea', earnings: '$2.5M/mo', emoji: '🎤', gradient: 'linear-gradient(135deg, #fbbf24, #f59e0b)' },
+            { id: 6, name: 'Mia Khalifa', handle: '@miakhalifa', earnings: '$2.2M/mo', emoji: '😈', gradient: 'linear-gradient(135deg, #ef4444, #dc2626)' },
+            { id: 7, name: 'Erica Mena', handle: '@iamEricaMena', earnings: '$1.9M/mo', emoji: '⭐', gradient: 'linear-gradient(135deg, #34d399, #10b981)' },
+            { id: 8, name: 'Bhad Bhabie', handle: '@bhadbhabie', earnings: '$1.7M/mo', emoji: '💰', gradient: 'linear-gradient(135deg, #22d3d1, #06b6d4)' },
+            { id: 9, name: 'Gemma McCourt', handle: '@justgemmal', earnings: '$1.4M/mo', emoji: '🇬🇧', gradient: 'linear-gradient(135deg, #fb7185, #f43f5e)' },
+            { id: 10, name: 'Amouranth', handle: '@amouranth', earnings: '$950K/mo', emoji: '🎮', gradient: 'linear-gradient(135deg, #c084fc, #a855f7)' }
+        ];
+
+        let selectedCandidate = null;
+        let hasVoted = false;
+        let voteData = {
+            votes: {},      // { odid: { odId, odName, odCount } }
+            totalVotes: 0,
+            voters: []      // Array of odIds who have voted (for this user)
+        };
+
+        // ============================================================
+        // 📊 DATABASE FUNCTIONS (Persistent Storage)
+        // ============================================================
+        
+        // Load votes from shared storage
+        async function loadVotes() {
+            try {
+                // Load shared vote data (visible to all users)
+                const result = await window.storage.get('goontek-votes', true);
+                if (result && result.value) {
+                    voteData = JSON.parse(result.value);
+                } else {
+                    // Initialize with zero votes
+                    voteData = {
+                        votes: {},
+                        totalVotes: 0,
+                        voters: []
+                    };
+                    candidates.forEach(c => {
+                        voteData.votes[c.id] = { odId: c.id, odName: c.name, odCount: 0 };
+                    });
+                    await saveVotes();
+                }
+                
+                // Check if this user has already voted (personal storage)
+                const userVote = await window.storage.get('goontek-user-voted', false);
+                if (userVote && userVote.value) {
+                    hasVoted = true;
+                }
+                
+                // Apply votes to candidates
+                candidates.forEach(c => {
+                    if (voteData.votes[c.id]) {
+                        c.votes = voteData.votes[c.id].odCount;
+                    } else {
+                        c.votes = 0;
+                    }
+                });
+                
+            } catch (error) {
+                console.log('Storage not available, using local state');
+                candidates.forEach(c => c.votes = 0);
+            }
+        }
+        
+        // Save votes to shared storage
+        async function saveVotes() {
+            try {
+                await window.storage.set('goontek-votes', JSON.stringify(voteData), true);
+            } catch (error) {
+                console.log('Could not save to storage:', error);
+            }
+        }
+        
+        // Record a vote
+        async function recordVote(candidateId) {
+            const candidate = candidates.find(c => c.id === candidateId);
+            if (!candidate) return false;
+            
+            // Update vote data
+            if (!voteData.votes[candidateId]) {
+                voteData.votes[candidateId] = { odId: candidateId, odName: candidate.name, odCount: 0 };
+            }
+            voteData.votes[candidateId].odCount += 1;
+            voteData.totalVotes += 1;
+            
+            // Update candidate object
+            candidate.votes = voteData.votes[candidateId].odCount;
+            
+            // Save to shared storage
+            await saveVotes();
+            
+            // Mark user as voted (personal storage)
+            try {
+                await window.storage.set('goontek-user-voted', JSON.stringify({ odId: candidateId, time: Date.now() }), false);
+            } catch (error) {
+                console.log('Could not save user vote status');
+            }
+            
+            hasVoted = true;
+            return true;
+        }
+        
+        // Reset all votes (admin function - call from console: resetAllVotes())
+        async function resetAllVotes() {
+            voteData = {
+                votes: {},
+                totalVotes: 0,
+                voters: []
+            };
+            candidates.forEach(c => {
+                voteData.votes[c.id] = { odId: c.id, odName: c.name, odCount: 0 };
+                c.votes = 0;
+            });
+            await saveVotes();
+            
+            // Clear user vote status
+            try {
+                await window.storage.delete('goontek-user-voted', false);
+            } catch (error) {}
+            
+            hasVoted = false;
+            selectedCandidate = null;
+            renderCandidates();
+            updateVoteButton();
+            showToast('All votes have been reset');
+        }
+        
+        // ============================================================
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        // Format currency
+        function formatCurrency(num) {
+            if (num >= 1000000) {
+                return '$' + (num / 1000000).toFixed(1) + 'M';
+            }
+            return '$' + formatNumber(num);
+        }
+
+        // Copy CA function
+        function copyCA() {
+            const ca = document.getElementById('ca-text').textContent;
+            navigator.clipboard.writeText(ca).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Initialize dashboard with CONFIG values
+        function initDashboard() {
+            // CA
+            document.getElementById('ca-text').textContent = CONFIG.contractAddress;
+            
+            // Market Cap
+            document.getElementById('market-cap').textContent = formatCurrency(CONFIG.marketCap);
+            document.getElementById('mcap-change').textContent = CONFIG.marketCapChange + ' (24h)';
+            document.getElementById('volume-24h').textContent = formatCurrency(CONFIG.volume24h);
+            document.getElementById('supply').textContent = CONFIG.circulatingSupply + ' $GOONTEK';
+            
+            // Creator Fees (with auto-calculated 50% to GoOnFunds)
+            document.getElementById('creator-fees').textContent = formatCurrency(CONFIG.creatorFeesTotal);
+            document.getElementById('fees-to-goon').textContent = formatCurrency(CALCULATED.feesToGoon);
+            document.getElementById('fees-today').textContent = '+' + formatCurrency(CONFIG.feesToday);
+            document.getElementById('fees-week').textContent = '+' + formatCurrency(CONFIG.feesThisWeek);
+            document.getElementById('fees-progress').style.width = CONFIG.creatorFeesTotal > 0 ? '50%' : '0%';
+            
+            // GoOnFunds (auto-calculated from 3% mcap + 50% fees)
+            document.getElementById('goonfunds').textContent = formatCurrency(CALCULATED.goonfundsTotal);
+            document.getElementById('goon-goal').textContent = formatCurrency(CONFIG.goonfundsGoal);
+            document.getElementById('from-mcap').textContent = formatCurrency(CALCULATED.fromMarketCap);
+            document.getElementById('from-fees').textContent = formatCurrency(CALCULATED.fromCreatorFees);
+            const goonProgress = CONFIG.goonfundsGoal > 0 ? (CALCULATED.goonfundsTotal / CONFIG.goonfundsGoal) * 100 : 0;
+            document.getElementById('goon-progress').style.width = Math.min(goonProgress, 100) + '%';
+            
+            // Quick Stats
+            document.getElementById('holders').textContent = formatNumber(CONFIG.holders);
+            document.getElementById('deployments').textContent = CONFIG.deployments;
+            document.getElementById('deployed-total').textContent = formatCurrency(CONFIG.totalDeployed);
+            
+            // Poll week
+            document.querySelector('.poll-week').textContent = 'Week ' + CONFIG.pollWeek + ' Poll';
+        }
+        
+        // Update total votes display from database
+        function updateTotalVotesDisplay() {
+            document.getElementById('total-votes').textContent = formatNumber(voteData.totalVotes);
+        }
+
+        // Calculate total votes
+        function getTotalVotes() {
+            const total = candidates.reduce((sum, c) => sum + (c.votes || 0), 0);
+            return total > 0 ? total : 1;
+        }
+
+        // Render candidates
+        function renderCandidates() {
+            const container = document.getElementById('candidates-list');
+            const totalVotes = getTotalVotes();
+            const hasAnyVotes = candidates.some(c => c.votes > 0);
+
+            container.innerHTML = candidates
+                .sort((a, b) => (b.votes || 0) - (a.votes || 0))
+                .map((candidate, index) => {
+                    const votes = candidate.votes || 0;
+                    const percentage = hasAnyVotes ? ((votes / totalVotes) * 100).toFixed(1) : '0.0';
+                    const isSelected = selectedCandidate === candidate.id;
+                    
+                    return `
+                        <div class="candidate ${isSelected ? 'selected' : ''}" data-id="${candidate.id}">
+                            <div class="candidate-row">
+                                <span class="candidate-rank">#${index + 1}</span>
+                                <div class="candidate-avatar" style="background: ${candidate.gradient}">${candidate.emoji}</div>
+                                <div class="candidate-info">
+                                    <div class="candidate-name">${candidate.name}</div>
+                                    <div class="candidate-handle">${candidate.handle}</div>
+                                    <div class="candidate-earnings">${candidate.earnings}</div>
+                                </div>
+                                <div class="candidate-stats">
+                                    <div class="candidate-votes">${formatNumber(votes)}</div>
+                                    <div class="candidate-percentage">${percentage}%</div>
+                                </div>
+                            </div>
+                            <div class="candidate-progress">
+                                <div class="candidate-progress-fill" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            // Add click handlers
+            document.querySelectorAll('.candidate').forEach(el => {
+                el.addEventListener('click', () => {
+                    if (hasVoted) return;
+                    const id = parseInt(el.dataset.id);
+                    selectedCandidate = id;
+                    renderCandidates();
+                    updateVoteButton();
+                });
+            });
+            
+            updateTotalVotesDisplay();
+        }
+
+        // Update vote button
+        function updateVoteButton() {
+            const btn = document.getElementById('vote-btn');
+            
+            if (hasVoted) {
+                btn.textContent = '✓ Vote Submitted';
+                btn.classList.add('voted');
+                btn.disabled = true;
+            } else if (selectedCandidate) {
+                const candidate = candidates.find(c => c.id === selectedCandidate);
+                btn.textContent = `Vote for ${candidate.name}`;
+                btn.disabled = false;
+            } else {
+                btn.textContent = 'Select a Creator';
+                btn.disabled = true;
+            }
+        }
+
+        // Handle vote
+        document.getElementById('vote-btn').addEventListener('click', async () => {
+            if (!selectedCandidate || hasVoted) return;
+
+            const candidate = candidates.find(c => c.id === selectedCandidate);
+            
+            // Record vote to database
+            const success = await recordVote(selectedCandidate);
+            
+            if (success) {
+                renderCandidates();
+                updateVoteButton();
+                showToast(`Vote cast for ${candidate.name}! 🎉`);
+            } else {
+                showToast('Error recording vote. Try again.');
+            }
+        });
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Generate mini chart
+        function generateChart() {
+            const chart = document.getElementById('mcap-chart');
+            const hasData = CONFIG.marketCap > 0;
+            const heights = hasData 
+                ? [35, 42, 38, 55, 48, 62, 58, 70, 65, 72, 68, 85, 78, 82, 90]
+                : [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+            
+            chart.innerHTML = heights.map(h => 
+                `<div class="chart-bar" style="height: ${h}%; opacity: ${hasData ? 0.6 : 0.2}"></div>`
+            ).join('');
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + CONFIG.pollEndDays);
+
+            function update() {
+                const now = new Date();
+                const diff = endDate - now;
+                if (diff <= 0) {
+                    document.getElementById('countdown').textContent = 'Voting Ended';
+                    return;
+                }
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('countdown').textContent = `${d}d ${h.toString().padStart(2, '0')}h ${m.toString().padStart(2, '0')}m`;
+            }
+
+            update();
+            setInterval(update, 60000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            initDashboard();
+            generateChart();
+            updateCountdown();
+            
+            // Load votes from database then render
+            await loadVotes();
+            renderCandidates();
+            updateVoteButton();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // Expose reset function to console for admin use
+        window.resetAllVotes = resetAllVotes;
+        
+        // ============================================================
+        // 🎲 RANDOM VOTE GENERATOR (~2 votes per minute)
+        // ============================================================
+        function generateRandomVote() {
+            // Pick a random candidate
+            const randomIndex = Math.floor(Math.random() * candidates.length);
+            const candidate = candidates[randomIndex];
+            
+            // Add vote
+            candidate.votes = (candidate.votes || 0) + 1;
+            voteData.totalVotes += 1;
+            
+            if (!voteData.votes[candidate.id]) {
+                voteData.votes[candidate.id] = { odId: candidate.id, odName: candidate.name, odCount: 0 };
+            }
+            voteData.votes[candidate.id].odCount = candidate.votes;
+            
+            // Re-render to show new vote
+            renderCandidates();
+        }
+        
+        // Start random vote generation (average 2 per minute = 1 every 30 seconds)
+        // Adding randomness: 20-40 second intervals
+        function startRandomVotes() {
+            function scheduleNext() {
+                const delay = 20000 + Math.random() * 20000; // 20-40 seconds
+                setTimeout(() => {
+                    generateRandomVote();
+                    scheduleNext();
+                }, delay);
+            }
+            scheduleNext();
+        }
+        
+        // Start generating votes after page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(startRandomVotes, 3000); // Start after 3 seconds
+        });
+    </script>
+</body>
+</html>
