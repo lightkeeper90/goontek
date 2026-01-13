@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$GOONTEK | Community Deployed Degeneracy</title>
+    <title>$GOONFANS | Community Funds for OnlyFans Subs</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -908,12 +908,12 @@
     <div class="grid-bg"></div>
 
     <nav>
-        <div class="logo">$<span>GOONTEK</span></div>
+        <div class="logo">$<span>GOONFANS</span></div>
         <div class="nav-links">
             <a href="#vote">Vote</a>
             <a href="#how">How It Works</a>
             <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://pump.fun" target="_blank" class="nav-btn">Buy $GOONTEK</a>
+            <a href="https://pump.fun" target="_blank" class="nav-btn">Buy $GOONFANS</a>
         </div>
     </nav>
 
@@ -932,7 +932,7 @@
     <section class="dashboard-hero">
         <div class="hero-header">
             <div class="live-badge">Live on Pump.fun</div>
-            <h1 class="hero-title">Community <span class="highlight">Deployed</span> Degeneracy</h1>
+            <h1 class="hero-title">Community <span class="highlight">Funds</span> for OnlyFans Subs</h1>
             <p class="hero-subtitle">Creator fees flow into community-voted OnlyFans subscriptions</p>
         </div>
 
@@ -953,7 +953,7 @@
                     </div>
                     <div class="breakdown-item">
                         <span>Circulating Supply</span>
-                        <span id="supply">0 $GOONTEK</span>
+                        <span id="supply">0 $GOONFANS</span>
                     </div>
                 </div>
             </div>
@@ -1066,7 +1066,7 @@
 
             <div class="vote-action">
                 <button class="vote-btn" id="vote-btn" disabled>Select a Creator</button>
-                <p class="vote-notice">Connect wallet to vote • 1 $GOONTEK = 1 vote</p>
+                <p class="vote-notice">Connect wallet to vote • 1 $GOONFANS = 1 vote</p>
             </div>
         </div>
     </section>
@@ -1092,7 +1092,7 @@
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-num">01</div>
-                <h3 class="step-title">Buy $GOONTEK</h3>
+                <h3 class="step-title">Buy $GOONFANS</h3>
                 <p class="step-desc">Get tokens on pump.fun. Join the community of degens.</p>
             </div>
             <div class="step-card">
@@ -1121,7 +1121,7 @@
             <a href="https://pump.fun" target="_blank">Pump.fun</a>
             <a href="https://dexscreener.com" target="_blank">Chart</a>
         </div>
-        <p class="footer-copy">© 2026 $GOONTEK — Not financial advice. Pure degeneracy.</p>
+        <p class="footer-copy">© 2026 $GOONFANS — Not financial advice. Community funds for OnlyFans subs.</p>
     </footer>
 
     <div class="toast" id="toast"></div>
@@ -1132,7 +1132,7 @@
         // ============================================================
         const CONFIG = {
             // Contract Address
-            contractAddress: "Subscribing",
+            contractAddress: "DEPLOYING",
             
             // === MAIN VALUES (edit these) ===
             marketCap: 0,              // Market cap in USD (e.g., 2400000 for $2.4M)
@@ -1202,7 +1202,7 @@
         async function loadVotes() {
             try {
                 // Load shared vote data (visible to all users)
-                const result = await window.storage.get('goontek-votes', true);
+                const result = await window.storage.get('goonfans-votes', true);
                 if (result && result.value) {
                     voteData = JSON.parse(result.value);
                 } else {
@@ -1219,7 +1219,7 @@
                 }
                 
                 // Check if this user has already voted (personal storage)
-                const userVote = await window.storage.get('goontek-user-voted', false);
+                const userVote = await window.storage.get('goonfans-user-voted', false);
                 if (userVote && userVote.value) {
                     hasVoted = true;
                 }
@@ -1242,7 +1242,7 @@
         // Save votes to shared storage
         async function saveVotes() {
             try {
-                await window.storage.set('goontek-votes', JSON.stringify(voteData), true);
+                await window.storage.set('goonfans-votes', JSON.stringify(voteData), true);
             } catch (error) {
                 console.log('Could not save to storage:', error);
             }
@@ -1268,7 +1268,7 @@
             
             // Mark user as voted (personal storage)
             try {
-                await window.storage.set('goontek-user-voted', JSON.stringify({ odId: candidateId, time: Date.now() }), false);
+                await window.storage.set('goonfans-user-voted', JSON.stringify({ odId: candidateId, time: Date.now() }), false);
             } catch (error) {
                 console.log('Could not save user vote status');
             }
@@ -1292,7 +1292,7 @@
             
             // Clear user vote status
             try {
-                await window.storage.delete('goontek-user-voted', false);
+                await window.storage.delete('goonfans-user-voted', false);
             } catch (error) {}
             
             hasVoted = false;
@@ -1340,7 +1340,7 @@
             document.getElementById('market-cap').textContent = formatCurrency(CONFIG.marketCap);
             document.getElementById('mcap-change').textContent = CONFIG.marketCapChange + ' (24h)';
             document.getElementById('volume-24h').textContent = formatCurrency(CONFIG.volume24h);
-            document.getElementById('supply').textContent = CONFIG.circulatingSupply + ' $GOONTEK';
+            document.getElementById('supply').textContent = CONFIG.circulatingSupply + ' $GOONFANS';
             
             // Creator Fees (with auto-calculated 50% to GoOnFunds)
             document.getElementById('creator-fees').textContent = formatCurrency(CONFIG.creatorFeesTotal);
