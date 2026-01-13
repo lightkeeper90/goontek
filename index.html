@@ -1048,7 +1048,7 @@
         <div class="voting-container">
             <div class="section-header">
                 <h2 class="section-title">Vote for Next Deployment</h2>
-                <p class="section-subtitle">Top 10 OnlyFans creators — Community decides where funds go</p>
+                <p class="section-subtitle">Top 10 Anime & Cosplay creators — Community decides where funds go</p>
             </div>
 
             <div class="poll-info">
@@ -1172,18 +1172,18 @@
         };
         // ============================================================
 
-        // Top 10 OnlyFans creators data
+        // Top 10 Anime/Cosplay OnlyFans creators
         const candidates = [
-            { id: 1, name: 'Blac Chyna', handle: '@blacchyna', earnings: '$20M/mo', emoji: '👑', gradient: 'linear-gradient(135deg, #f472b6, #ec4899)' },
-            { id: 2, name: 'Sophie Rain', handle: '@sophierain', earnings: '$5.3M/mo', emoji: '🌧️', gradient: 'linear-gradient(135deg, #60a5fa, #3b82f6)' },
-            { id: 3, name: 'Bella Thorne', handle: '@bellathorne', earnings: '$3.1M/mo', emoji: '🔥', gradient: 'linear-gradient(135deg, #f97316, #ef4444)' },
-            { id: 4, name: 'Cardi B', handle: '@iamcardib', earnings: '$2.8M/mo', emoji: '💎', gradient: 'linear-gradient(135deg, #a78bfa, #8b5cf6)' },
-            { id: 5, name: 'Iggy Azalea', handle: '@iggyazalea', earnings: '$2.5M/mo', emoji: '🎤', gradient: 'linear-gradient(135deg, #fbbf24, #f59e0b)' },
-            { id: 6, name: 'Mia Khalifa', handle: '@miakhalifa', earnings: '$2.2M/mo', emoji: '😈', gradient: 'linear-gradient(135deg, #ef4444, #dc2626)' },
-            { id: 7, name: 'Erica Mena', handle: '@iamEricaMena', earnings: '$1.9M/mo', emoji: '⭐', gradient: 'linear-gradient(135deg, #34d399, #10b981)' },
-            { id: 8, name: 'Bhad Bhabie', handle: '@bhadbhabie', earnings: '$1.7M/mo', emoji: '💰', gradient: 'linear-gradient(135deg, #22d3d1, #06b6d4)' },
-            { id: 9, name: 'Gemma McCourt', handle: '@justgemmal', earnings: '$1.4M/mo', emoji: '🇬🇧', gradient: 'linear-gradient(135deg, #fb7185, #f43f5e)' },
-            { id: 10, name: 'Amouranth', handle: '@amouranth', earnings: '$950K/mo', emoji: '🎮', gradient: 'linear-gradient(135deg, #c084fc, #a855f7)' }
+            { id: 1, name: 'Belle Delphine', handle: '@belledelphine', earnings: '$1.2M/mo', gradient: 'linear-gradient(135deg, #f9a8d4, #ec4899)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Belle&backgroundColor=ffdfbf' },
+            { id: 2, name: 'Jessica Nigri', handle: '@jessicanigri', earnings: '$500K/mo', gradient: 'linear-gradient(135deg, #fbbf24, #f59e0b)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Jessica&backgroundColor=ffd5dc' },
+            { id: 3, name: 'Hana Bunny', handle: '@hanabunny', earnings: '$400K/mo', gradient: 'linear-gradient(135deg, #f472b6, #db2777)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Hana&backgroundColor=d5f5e3' },
+            { id: 4, name: 'Momokun', handle: '@momokun', earnings: '$350K/mo', gradient: 'linear-gradient(135deg, #fb923c, #ea580c)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Momo&backgroundColor=fce7f3' },
+            { id: 5, name: 'Meg Turney', handle: '@megturney', earnings: '$300K/mo', gradient: 'linear-gradient(135deg, #ef4444, #dc2626)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Meg&backgroundColor=dbeafe' },
+            { id: 6, name: 'Swimsuit Succubus', handle: '@succubus', earnings: '$280K/mo', gradient: 'linear-gradient(135deg, #a78bfa, #7c3aed)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Succubus&backgroundColor=ede9fe' },
+            { id: 7, name: 'Jinx ASMR', handle: '@jinxasmr', earnings: '$250K/mo', gradient: 'linear-gradient(135deg, #818cf8, #6366f1)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Jinx&backgroundColor=e0e7ff' },
+            { id: 8, name: 'Pia', handle: '@pia', earnings: '$220K/mo', gradient: 'linear-gradient(135deg, #f9a8d4, #f472b6)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Pia&backgroundColor=fce7f3' },
+            { id: 9, name: 'Liz Katz', handle: '@lizkatz', earnings: '$200K/mo', gradient: 'linear-gradient(135deg, #34d399, #10b981)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Liz&backgroundColor=d1fae5' },
+            { id: 10, name: 'Kayla Erin', handle: '@kaylaerin', earnings: '$180K/mo', gradient: 'linear-gradient(135deg, #60a5fa, #3b82f6)', avatar: 'https://api.dicebear.com/7.x/lorelei-neutral/svg?seed=Kayla&backgroundColor=dbeafe' }
         ];
 
         let selectedCandidate = null;
@@ -1394,7 +1394,9 @@
                         <div class="candidate ${isSelected ? 'selected' : ''}" data-id="${candidate.id}">
                             <div class="candidate-row">
                                 <span class="candidate-rank">#${index + 1}</span>
-                                <div class="candidate-avatar" style="background: ${candidate.gradient}">${candidate.emoji}</div>
+                                <div class="candidate-avatar" style="background: ${candidate.gradient}; overflow: hidden; padding: 0;">
+                                    <img src="${candidate.avatar}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none';">
+                                </div>
                                 <div class="candidate-info">
                                     <div class="candidate-name">${candidate.name}</div>
                                     <div class="candidate-handle">${candidate.handle}</div>
